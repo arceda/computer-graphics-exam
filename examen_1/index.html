@@ -1,0 +1,191 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="jquery-3.4.1.min.js"></script> 
+</head>
+<style></style>
+
+
+
+<body>
+
+
+
+<center>
+
+<h1> Primer examen de Computación Gráfica</h1>
+<h3> CUI: <input id = "input_cui"> </input> </h3>
+<h3> <font color='red'>No utilice instrucciones GUI como cv2.imshow(), plt.show(), etc.</font> </h3>
+<table width="800">
+
+<!-- 
+##########################################################################################################
+########################### PREGUNTA 1 ###################################################################
+##########################################################################################################
+-->
+<tr>
+    <td width="50%"> <strong>Pregunta 1</strong> <br> 
+        Implemente un programa que segmente los campos de trigo (campos amarillos) de la siguiente imágen. 
+        <br>
+        <img src="img/question_1.png" width="300">  </img>
+        <br> <br>
+        <button id = "button_question_1">Enviar</button>
+
+        <br><br>
+        <div id='response_question_1'></div>
+    
+    </td>
+    <td width="50%"> <textarea id="text_question_1" rows="30" cols="60"> 
+import cv2
+import numpy as np
+import matplotlib as plt
+
+img = cv2.imread("question_1.png")
+
+#########  write your code here ##################
+
+img_out = img
+
+
+
+
+
+
+
+
+
+######## the result have to be set in img_out ####
+######## not modify from here ####################
+
+cv2.imwrite("question_1_sol.jpg", img_out)
+    </textarea></td>
+</tr>  
+
+
+<!-- 
+##########################################################################################################
+########################### PREGUNTA 2 ###################################################################
+##########################################################################################################
+-->
+<tr>
+    <td width="50%"> <strong>Pregunta 2</strong> <br> 
+        Implemente un programa que mejore el cponstraste de la siguiente imágen. 
+        <br>
+        <img src="img/question_2.jpg" width="200">  </img>
+        <br> <br>
+        <button id = "button_question_2">Enviar</button>
+
+        <br><br>
+        <div id='response_question_2'></div>
+    
+    </td>
+    <td width="50%"> <textarea id="text_question_2" rows="30" cols="60"> 
+import cv2
+import numpy as np
+import matplotlib as plt
+
+img = cv2.imread("question_2.jpg")
+
+#########  write your code here ##################
+
+img_out = img
+
+
+
+
+
+
+
+
+
+######## the result have to be set in img_out ####
+######## not modify from here ####################
+
+cv2.imwrite("question_2_sol.jpg", img_out)
+    </textarea></td>
+</tr>  
+    
+</table>
+
+
+</textarea> 
+</center>
+
+<script> 
+    var server = "http://localhost/computer-graphics/examen_1/main.php"
+    //AJAX con JSON
+
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////// PREGUNTA 1 ///////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    $("#button_question_1" ).click(function() {
+        if ( $('#input_cui').val().trim() == "" )  $('#response_question_1').html("<font color='red'>INGRESE SU CUI!!!</font>");
+        else {
+            var formData = new FormData();
+            formData.append('cui', $('#input_cui').val());
+            formData.append('question', 'question_1');
+            formData.append('code', $('#text_question_1').val());
+
+            $.ajax({
+                    url: server,
+                    type: 'POST',
+                    data : formData,
+                    dataType: 'json',     //the server return json
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,  // tell jQuery not to set contentType
+                    success : function(data) {  
+                        console.log(data); 
+                        var code = data.code_result;   
+                        var msg = data.message;
+                        if (code == 1)
+                            $('#response_question_1').html("<font color='blue'>"  +msg  + "</font>");
+                        else
+                            $('#response_question_1').html("<font color='red'>"  +msg  + "</font>");
+
+                        
+                    }                
+            });
+        }
+    });
+    
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////// PREGUNTA 2 ///////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    $("#button_question_2" ).click(function() {
+        if ( $('#input_cui').val().trim() == "" )  $('#response_question_2').html("<font color='red'>INGRESE SU CUI!!!</font>");
+        else {
+            var formData = new FormData();
+            formData.append('cui', $('#input_cui').val());
+            formData.append('question', 'question_2');
+            formData.append('code', $('#text_question_2').val());
+
+            $.ajax({
+                    url: server,
+                    type: 'POST',
+                    data : formData,
+                    dataType: 'json',     //the server return json
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,  // tell jQuery not to set contentType
+                    success : function(data) {  
+                        console.log(data); 
+                        var code = data.code_result;   
+                        var msg = data.message;
+                        if (code == 1)
+                            $('#response_question_2').html("<font color='blue'>"  +msg  + "</font>");
+                        else
+                        $('#response_question_2').html("<font color='red'>"  +msg  + "</font>");
+                    }                
+            });
+        }
+    });
+
+
+    
+
+</script>
+</body>
+
+</html>

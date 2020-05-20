@@ -1,0 +1,90 @@
+ <html> <body> <center> <h3> CUI:20101060 </h3> <br> <table> <tr>  <td><b>Question</b></td>  <td><b>Code</b></td>  <td><b>Result</b></td> <td><b>Output</b></td> <td><b>Plagiarism</b></td> </tr><td> question_1<br> <br>May-18-2020<br> 06:44:56 </td><td> <textarea rows='30' cols='60'>#May-18-2020 06:44:56 PM
+ 
+import cv2
+import numpy as np
+import matplotlib as plt
+
+img = cv2.imread("question_1.png")
+
+#########  write your code here ##################
+
+img_out = img
+
+
+
+
+
+
+
+
+######## the result have to be set in img_out ####
+######## not modify from here ####################
+
+cv2.imwrite("question_1_sol.jpg", img_out)
+    </textarea></td><td> <img src='question_1_sol.jpg' width='400' height='400'></img> </td> <td width='150px'>  </td> <td > <table border='1'> <tr> <td> CUI </td> <td> similarity </td> </tr><tr> <td> 20101058</td>  <td> 0.78125</td> </tr> <tr> <td> 452782</td>  <td> 0.828125</td> </tr> <tr> <td> 20101060</td>  <td> 0.0</td> </tr> <tr> <td> 20101059</td>  <td> 0.828125</td> </tr> </table> </td> </tr><td> question_2<br> <br>May-18-2020<br> 06:42:31 </td><td> <textarea rows='30' cols='60'>#May-18-2020 06:42:31 PM
+ 
+import cv2
+import numpy as np
+import matplotlib as plt
+
+img = cv2.imread("question_2.jpg")
+
+#########  write your code here ##################
+
+
+for i in range(10):
+    for j in range(10):
+        img[i][j] = 10
+
+print("image opened, size:", img.shape)
+
+#normal contrast stretching #########################################
+a = 0
+b = 255
+c = img.min()
+d = img.max()
+print("c:", c)
+print("d:", d)
+
+def contrast_stretching(img, a, b, c, d):
+    img = img.astype(int) #this is very import because the images are normally unsigned
+    
+    factor = (b-a)/(d-c)
+    new_img = ((img - c)*factor) + a
+
+    print(new_img.min())
+    print(new_img.max())
+
+    for i, row in enumerate(new_img):
+        for j, x in enumerate(row):
+            if x < 0:
+                new_img[i][j] = 0
+            if x > 255:
+                new_img[i][j] = 255
+
+    
+    return new_img
+
+
+new_img = contrast_stretching(img, a, b, c, d)
+
+
+
+
+img_out = new_img
+
+######## the result have to be set in img_out ####
+######## not modify from here ####################
+
+cv2.imwrite("question_2_sol.jpg", img_out)
+    </textarea></td><td> <img src='question_2_sol.jpg' width='400' height='400'></img> </td> <td width='150px'> ('image opened, size:', (663, 412, 3))
+('c:', 10)
+('d:', 255)
+0
+245
+Traceback (most recent call last):
+  File "question_2.py", line 46, in <module>
+    new_img = contrast_stretching(img, a, b, c, d)
+  File "question_2.py", line 37, in contrast_stretching
+    if x < 0:
+ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all() </td> <td > <table border='1'> <tr> <td> CUI </td> <td> similarity </td> </tr><tr> <td> 20101059</td>  <td> 0.8671875</td> </tr> <tr> <td> 20101060</td>  <td> 0.0</td> </tr> <tr> <td> 452782</td>  <td> 0.8671875</td> </tr> <tr> <td> 20101058</td>  <td> 0.8046875</td> </tr> </table> </td> </tr> </table> </center> </body></html> 
