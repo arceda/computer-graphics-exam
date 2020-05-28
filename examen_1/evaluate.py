@@ -7,8 +7,8 @@ from plagiarism import load_template_text
 
 # run python with sudo
 
-path_exams = "/var/www/html/computer-graphics/examen_1/exams/"
-path_imgs = "/var/www/html/computer-graphics/examen_1/img/"
+path_exams = "/var/www/html/computer-graphics-exam/examen_1/exams/"
+path_imgs = "/var/www/html/computer-graphics-exam/examen_1/img/"
 
 def get_files_of_question(question):
     cuis = glob.glob(path_exams + "/*")
@@ -92,7 +92,7 @@ for cui in cuis:
 
     for question in questions:    
         question_name = question.split("/")[-1]
-        cmd = 'cd ' + cui + ';  python ' + question_name
+        cmd = 'cd ' + cui + ';  python3 ' + question_name
         #print(cmd)
         #os.system(cmd)
         output = subprocess.getoutput(cmd)
