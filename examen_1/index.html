@@ -24,11 +24,19 @@
 ##########################################################################################################
 -->
 <tr>
-    <td width="50%"> <strong>Pregunta 1</strong> <br> 
-        Implemente un programa que segmente los campos de trigo (campos amarillos) de la siguiente imágen. 
-        <br>
-        <img src="img/question_1.png" width="300">  </img>
+    <td colspan="2"> <strong>Pregunta 1</strong> <br>  Mejore el contraste de la imagen a continuación. Utilice el operador adecuado según su criterio. 
+    </td>
+</tr>
+
+<tr>
+    <td width="50%"> 
+        Entrada: <br>      
+        <img src="img/question_1.png" width="300" height="200">  </img>
         <br> <br>
+        Resultado deseado:
+        <img src="img/question_1_sol.png" width="300" height="200">  </img>
+        <br> <br>
+
         <button id = "button_question_1">Enviar</button>
 
         <br><br>
@@ -57,7 +65,7 @@ img_out = img
 ######## the result have to be set in img_out ####
 ######## not modify from here ####################
 
-cv2.imwrite("question_1_sol.jpg", img_out)
+cv2.imwrite("question_1_sol.png", img_out)
     </textarea></td>
 </tr>  
 
@@ -67,12 +75,21 @@ cv2.imwrite("question_1_sol.jpg", img_out)
 ########################### PREGUNTA 2 ###################################################################
 ##########################################################################################################
 -->
+
 <tr>
-    <td width="50%"> <strong>Pregunta 2</strong> <br> 
-        Implemente un programa que mejore el cponstraste de la siguiente imágen. 
-        <br>
-        <img src="img/question_2.jpg" width="200">  </img>
+    <td colspan="2"> <strong>Pregunta 2</strong> <br>  En la siguiente imagen se muestra algunas celulas, diseñe un programa que segmente dichas células. 
+    </td>
+</tr>
+
+<tr>
+    <td width="50%"> 
+        Entrada: <br>    
+        <img src="img/question_2.png" width="300" height="200">  </img>
         <br> <br>
+        Resultado deseado:
+        <img src="img/question_2_sol.png" width="300" height="200">  </img>
+        <br> <br>
+
         <button id = "button_question_2">Enviar</button>
 
         <br><br>
@@ -84,7 +101,7 @@ import cv2
 import numpy as np
 import matplotlib as plt
 
-img = cv2.imread("question_2.jpg")
+img = cv2.imread("question_2.png")
 
 #########  write your code here ##################
 
@@ -101,14 +118,76 @@ img_out = img
 ######## the result have to be set in img_out ####
 ######## not modify from here ####################
 
-cv2.imwrite("question_2_sol.jpg", img_out)
+cv2.imwrite("question_2_sol.png", img_out)
     </textarea></td>
 </tr>  
+    
+
+<!-- 
+##########################################################################################################
+########################### PREGUNTA 3 ###################################################################
+##########################################################################################################
+-->
+
+<tr>
+    <td colspan="2"> <strong>Pregunta 3</strong> <br>  Thresholding es un método normalmente utilizado para la segmentación de objetos, pero existen casos 
+         donde este método no funciona adecuadamente, como es el caso de la imagen de abajo. Debido a esto es 
+         necesario aplicar un threshold adatativo, donde por cada pixel se tomará un threshold diferente. 
+         Este Threshold es igual al promedio de las intensidades de los pixeles 
+         vecinos menos una constante C. Implemente dicho operador, usted decide cuantos vecinos tomar y el valor de C.
+    </td>
+</tr>
+
+<tr>
+    <td width="50%"> 
+        Entrada: <br>    
+        <img src="img/question_3.png" width="300" height="200">  </img>
+        <br> <br>
+        Resultado deseado:
+        <img src="img/question_3_sol.png" width="300" height="200">  </img>
+        <br> <br>
+
+        <button id = "button_question_3">Enviar</button>
+
+        <br><br>
+        <div id='response_question_3'></div>
+    
+    </td>
+    <td width="50%"> <textarea id="text_question_3" rows="30" cols="60"> 
+import cv2
+import numpy as np
+import matplotlib as plt
+
+img = cv2.imread("question_3.png")
+
+#########  write your code here ##################
+
+img_out = img
+
+
+
+
+
+
+
+
+
+######## the result have to be set in img_out ####
+######## not modify from here ####################
+
+cv2.imwrite("question_3_sol.png", img_out)
+    </textarea></td>
+</tr>  
+
     
 </table>
 
 
-</textarea> 
+
+
+
+
+
 </center>
 
 <script> 
@@ -177,6 +256,38 @@ cv2.imwrite("question_2_sol.jpg", img_out)
                             $('#response_question_2').html("<font color='blue'>"  +msg  + "</font>");
                         else
                         $('#response_question_2').html("<font color='red'>"  +msg  + "</font>");
+                    }                
+            });
+        }
+    });
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////// PREGUNTA 3 ///////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    $("#button_question_3" ).click(function() {
+        if ( $('#input_cui').val().trim() == "" )  $('#response_question_3').html("<font color='red'>INGRESE SU CUI!!!</font>");
+        else {
+            var formData = new FormData();
+            formData.append('cui', $('#input_cui').val());
+            formData.append('question', 'question_3');
+            formData.append('code', $('#text_question_3').val());
+
+            $.ajax({
+                    url: server,
+                    type: 'POST',
+                    data : formData,
+                    dataType: 'json',     //the server return json
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,  // tell jQuery not to set contentType
+                    success : function(data) {  
+                        console.log(data); 
+                        var code = data.code_result;   
+                        var msg = data.message;
+                        if (code == 1)
+                            $('#response_question_3').html("<font color='blue'>"  +msg  + "</font>");
+                        else
+                        $('#response_question_3').html("<font color='red'>"  +msg  + "</font>");
                     }                
             });
         }

@@ -121,7 +121,7 @@ for cui in cuis:
     
         html += "<td> " + question_name_without_ext + "<br> <br>" + date + "<br> " + time + " </td>"
         html += "<td> <textarea rows='30' cols='60'>" + code + "</textarea></td>"
-        html += "<td> <img src='" + question_name_without_ext + "_sol.jpg' width='400' height='400'></img> </td> "
+        html += "<td> <img src='" + question_name_without_ext + "_sol.png' width='400' height='400'></img> </td> "
         html += "<td width='150px'> " + output + " </td> "
         html += "<td > " + plag_table_html + " </td> </tr>"
 
