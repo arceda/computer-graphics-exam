@@ -47,6 +47,7 @@ def detect_plagiarism(question, files, path):
     #print('aquiii')
     #print(data)
 
+    data = sorted(data, key=lambda x: x[1])
     return data
 
     #result_file = open(path + '/' +summary_file_name, "w")
@@ -61,7 +62,7 @@ def detect_plagiarism(question, files, path):
 ##########################################################################################
 
 
-imgs = glob.glob(path_imgs + "/*.*")
+imgs = glob.glob(path_imgs + "/question_*.*")
 for img in imgs:
     name = img.split("/")[-1]
     cuis = glob.glob(path_exams+'/*')

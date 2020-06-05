@@ -11,6 +11,7 @@ try {
     $code       =  $_POST["code"];	
 
     $path = "/var/www/html/computer-graphics-exam/examen_1/exams/$cui";
+    //$path = "/home/vicente/exams/$cui";
     //$path_2 = "/var/www/html/computer-graphics/examen_1/exams/$cui/$question";
 
     if (!file_exists($path)) {
